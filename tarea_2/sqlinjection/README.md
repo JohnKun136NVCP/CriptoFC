@@ -16,7 +16,7 @@ Una vez hecho esto, solamente corra el programa ```python3 app.py```, no hay nad
 
 - Intente probar hasta que lo deje loguear y después aparezca cierta información en partícular.
 
-- Dentro de la información que aparece, hay un texto muy largo, copie ese texto y vaya a la página https://gchq.github.io/CyberChef/ 
+- Dentro de la información que aparece, hay un texto que tiene o parece tener una logitud menor a diferencia de los demás, copie ese texto y vaya a la página https://gchq.github.io/CyberChef/ 
 
 - Del lado derecho verá un apartado donde dice **Favorites**, arrastre la opción donde dice *From Base64* al apartado *recipe*.
 - Una vez hecho esto, copie el texto largo y peguelo a donde dice *input* en la página. Después de click en **BAKE!** sino aparece nada, sino saldrá el mensaje oculto.
