@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login - Vocaloid Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>Vocaloid Store</h1>
+    <nav>
+        <a href="{{ url_for('home') }}">Inicio</a>
+        <a href="{{ url_for('home') }}#catalogo">Catálogo</a>
+        <a href="{{ url_for('login_page') }}">Login</a>
+    </nav>
+</header>
+
+<section class="login">
+    <h2>Login Administrador</h2>
+    <form id="loginForm">
+        <label>Usuario</label>
+        <input type="text" id="usuario" placeholder="Tu usuario" required>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Tu contraseña" required>
+
+        <button type="submit">Entrar</button>
+    </form>
+    <div id="resultado"></div>
+</section>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

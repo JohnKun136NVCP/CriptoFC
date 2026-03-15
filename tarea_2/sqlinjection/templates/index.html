@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Vocaloid Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<link rel="icon" href="https://play-lh.googleusercontent.com/_7UsTACLVyLC9wEpOP21qomR8UZzJQlJ8PZsUVx7StZPmcejKwYeU92wKMPd_Jykzl0" type="image/jpg">
+</head>
+
+<body>
+<!-- Loader -->
+<div id="loader">
+    <img src="https://i.pinimg.com/originals/e2/13/24/e213246ff4efb97a9d3de2f71d45a0c5.gif" alt="Miku Chibi">
+    <div class="dots">
+        <span></span><span></span><span></span>
+    </div>
+    <span>Cargando Vocaloid Store</span>
+</div>
+<header>
+    <h1>Vocaloid Store</h1>
+    <nav>
+        <a href="{{ url_for('home') }}">Inicio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#ofertas">Ofertas</a>
+    </nav>
+    <div class="icons">
+        <a href="{{ url_for('login_page') }}">
+            <i class="fa-solid fa-user"></i>
+        </a>
+        <a href="#">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+        <h2>Nueva Colección Vocaloid 2026</h2>
+        <p>Figuras, CDs, skins y mucho más para todos los fans</p>
+        <button onclick="window.scrollTo({top:document.querySelector('#catalogo').offsetTop, behavior:'smooth'})">Ver catálogo</button>
+    </div>
+</section>
+
+<main>
+    <section id="catalogo" class="productos">
+        <h2>Catálogo Vocaloid</h2>
+        <div class="grid">
+            {% for p in productos %}
+            <div class="item">
+                <img src="{{p.img}}" alt="{{p.nombre}}">
+                <p>{{p.nombre}}</p>
+                <span>${{p.precio}} MXN</span>
+                <button class="buy">Agregar al carrito</button>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2026 Vocaloid Store</p>
+    <p>Síguenos en redes</p>
+    <div class="icons">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+    </div>
+</footer>
+<script>
+
+window.addEventListener("load", function() {
+    const loader = document.getElementById("loader");
+    
+    // Forzar que dure 3 segundos
+    setTimeout(() => {
+        loader.style.transition = "opacity 0.5s ease";
+        loader.style.opacity = "0";
+        setTimeout(() => loader.style.display = "none", 500);
+    }, 3000);
+});
+
+</script>
+</body>
+</html>

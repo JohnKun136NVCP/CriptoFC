@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel Administrativo - Vocaloid Store</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<style>
+/* Navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0a0a0a;
+    color: #00f0ff;
+    padding: 15px 30px;
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #00f0ff;
+}
+
+header nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+header nav a:hover {
+    color: #ff66ff;
+}
+
+/* Admin grid - user cards */
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* User card */
+.user-card {
+    background: rgba(0,0,0,0.8);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 6px 25px rgba(0,255,255,0.2);
+    transition: 0.3s;
+    color: white;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255,102,255,0.3);
+}
+
+.user-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.user-card p {
+    margin: 5px 0;
+    font-weight: 500;
+    word-break: break-word;
+    font-size: 1rem;
+    color: #00f0ff;
+}
+
+.user-card span {
+    display: block;
+    word-break: break-all;  
+    font-size: 0.85rem;
+    margin-top: 5px;
+    color: #ff66ff;
+}
+
+/* Admin container */
+.admin {
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+h2 {
+    color: #00f0ff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Panel Administrativo - Vocaloid</h1>
+    <nav>
+        <a href="{{ url_for('home') }}">Inicio</a>
+        <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+    </nav>
+</header>
+
+<div class="admin">
+
+<h2>Gestión de usuarios</h2>
+
+<div class="admin-grid">
+    {% for u in usuarios %}
+    <div class="user-card">
+        <img src="{{ u.img }}" alt="Usuario">
+        <p>{{ u.nombre }}</p>
+        <span>{{ u.password }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+</div>
+</body>
+</html>
