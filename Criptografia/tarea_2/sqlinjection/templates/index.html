@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda de Ropa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Fashion Store</h1>
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="#">Catálogo</a>
+            <a href="#">Ofertas</a>
+            <a href="#">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="productos">
+            <h2>Catálogo</h2>
+            <div class="grid">
+                <div class="item">
+                    <img src="https://via.placeholder.com/150" alt="Camisa">
+                    <p>Camisa Blanca</p>
+                    <span>$250 MXN</span>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/150" alt="Pantalón">
+                    <p>Pantalón Negro</p>
+                    <span>$400 MXN</span>
+                </div>
+                <div class="item">
+                    <img src="https://via.placeholder.com/150" alt="Zapatos">
+                    <p>Zapatos Casual</p>
+                    <span>$600 MXN</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="login">
+            <h2>Login website</h2>
+            <form id="loginForm">
+                <label>Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required><br>
+                <label>Password:</label>
+                <input type="password" id="password" name="password" required><br>
+                <button type="submit">Entrar</button>
+            </form>
+            <div id="resultado"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Fashion Store</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
