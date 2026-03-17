@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Demostración XSS</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; gap: 50px; }
+        .box { width: 45%; border: 1px solid #ccc; padding: 10px; }
+        h2 { margin-top: 0; }
+    </style>
+</head>
+<body>
+    <!-- Vuneración XSS
+    <img src=x onerror="alert(
+'=== YOU HAVE BEEN PWNED BY XSS ===\n\n' +
+'⚠ MIRA, FUISTE VÍCTIMA DE UN ATAQUE XSS ⚠\n\n' +
+'Hora del ataque: ' + new Date().toLocaleString() + '\n' +
+'URL comprometida: ' + window.location.href
+)">
+ 
+    -->
+    <div class="box">
+        <h2>Versión Vulnerable</h2>
+        <form method="GET">
+            <input type="text" name="q" placeholder="Escribe tu búsqueda">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <h3>Resultado:</h3>
+        <p id="resultado-vulnerable">Sin resultados</p>
+
+        <script>
+            const paramsV = new URLSearchParams(window.location.search);
+            const qV = paramsV.get("q");
+
+            if (qV !== null) {
+               // Vulnerable: permite inyección de HTML/JS 
+                document.getElementById("resultado-vulnerable").innerHTML = qV;
+            }
+        </script>
+    </div>
+
+    <!-- Vulnerbilidad corregida-->
+    <div class="box">
+        <h2>Versión Segura</h2>
+        <form method="GET">
+            <input type="text" name="q2" placeholder="Escribe tu búsqueda">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <h3>Resultado:</h3>
+        <p id="resultado-seguro">Sin resultados</p>
+
+        <script>
+            const paramsS = new URLSearchParams(window.location.search);
+            const qS = paramsS.get("q2");
+
+            if (qS !== null) {
+                // Vulnerabilidad corregida: escapa el contenido para evitar inyección
+                document.getElementById("resultado-seguro").textContent = qS;
+            }
+        </script>
+    </div>
+
+</body>
+</html>
