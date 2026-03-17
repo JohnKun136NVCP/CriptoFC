@@ -35,17 +35,14 @@ def login():
     conn = get_db()
     cursor = conn.cursor()
 
-    # SQL vulnerable intencional
     query = f"SELECT * FROM usuarios WHERE nombre='{usuario}' AND password='{password}'"
     cursor.execute(query)
     resultados = cursor.fetchall()
 
     if resultados:
         conn.close()
-        # simulamos login: devolvemos redirect
         return jsonify({"success": True, "redirect": "/admin"})
 
-    # Probar con SHA256
     password_hash = hashlib.sha256(password.encode()).hexdigest()
     query_hash = f"SELECT * FROM usuarios WHERE nombre='{usuario}' AND password='{password_hash}'"
     cursor.execute(query_hash)
@@ -60,7 +57,7 @@ def login():
 
 @app.route("/admin")
 def admin_page():
-    # No usamos session: solo simulamos que el login fue correcto
+
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM usuarios")
