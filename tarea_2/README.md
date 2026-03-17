@@ -156,6 +156,12 @@ def des_decrypt(data, key):
         result += dec.to_bytes(8, "big")
 
     return result
+message = b"noche697"
+key_text = "data7Qa="
+key = int.from_bytes(key_text.encode(), "big")
+# En serio ya fue mucha ayuda xd, nada más tiene que investigar como convertir a base64 para cifrado y descifrado
+# cipher = des_encrypt(message, key), cipher_base64 = base64.b64encode(cipher).decode("ascii") Con esto tienes el 98% del ejercicio xd.
+# Solo la implemntación es para ir buscando en un archivo para el siguiente ejercicio, si quieres copiarlo y pegarlo solo CITALO xD.
 ```
 Estas matrices ya están predefinidas por lo tanto no a que moverle ya que sino no va salir el cifrado y descifrado.
 
