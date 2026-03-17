@@ -72,6 +72,90 @@ KEY_SHIFT = [
 1,1,2,2,2,2,2,2,
 1,2,2,2,2,2,2,1
 ]
+# --- FUNCIONES ---
+
+def permute(block, table, bits):
+    result = 0
+    for p in table:
+        result = (result << 1) | ((block >> (bits - p)) & 1)
+    return result
+
+
+def left_rotate(val, shift, size):
+    return ((val << shift) & ((1 << size) - 1)) | (val >> (size - shift))
+
+
+def sbox_substitution(block):
+    result = 0
+    for i in range(8):
+        chunk = (block >> (42 - 6*i)) & 0x3F
+        row = ((chunk & 0x20) >> 4) | (chunk & 1)
+        col = (chunk >> 1) & 0xF
+        result = (result << 4) | S_BOXES[i][row][col]
+    return result
+
+
+def generate_keys(key):
+    keys = []
+    key = permute(key, PC1, 64)
+
+    left = (key >> 28) & 0xFFFFFFF
+    right = key & 0xFFFFFFF
+
+    for shift in KEY_SHIFT:
+        left = left_rotate(left, shift, 28)
+        right = left_rotate(right, shift, 28)
+
+        combined = (left << 28) | right
+        keys.append(permute(combined, PC2, 56))
+
+    return keys
+
+
+def des_block(block, keys):
+    block = permute(block, IP, 64)
+
+    left = (block >> 32) & 0xFFFFFFFF
+    right = block & 0xFFFFFFFF
+
+    for k in keys:
+        temp = right
+
+        right = permute(right, E, 32)
+        right ^= k
+        right = sbox_substitution(right)
+        right = permute(right, P, 32)
+        right ^= left
+
+        left = temp
+
+    combined = (right << 32) | left
+    return permute(combined, FP, 64)
+
+
+def des_encrypt(data, key):
+    keys = generate_keys(key)
+    result = b""
+
+    for i in range(0, len(data), 8):
+        block = int.from_bytes(data[i:i+8], "big")
+        enc = des_block(block, keys)
+        result += enc.to_bytes(8, "big")
+
+    return result
+
+
+def des_decrypt(data, key):
+    keys = generate_keys(key)
+    keys.reverse()
+    result = b""
+
+    for i in range(0, len(data), 8):
+        block = int.from_bytes(data[i:i+8], "big")
+        dec = des_block(block, keys)
+        result += dec.to_bytes(8, "big")
+
+    return result
 ```
 Estas matrices ya están predefinidas por lo tanto no a que moverle ya que sino no va salir el cifrado y descifrado.
 
