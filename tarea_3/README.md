@@ -182,7 +182,7 @@ La contraseña es "eje4". Si el comando es exitoso, se extraerá un archivo llam
 
 ```bash
 chmod +x silent.sh
-./secrets.sh
+./silent.sh
 ```
 
 Lo curioso es que muestra la imagen en ascii art, pero hay un mensaje oculto si empezamos a jugar con el navegador y **seleccionando el texto**
@@ -586,18 +586,8 @@ Una vez ejecutado el payload, deberíamos ver una conexión entrante en el liste
 Alguna pregunta para reflexionar: ¿Qué medidas de seguridad se podrían implementar para prevenir este tipo de ataques de ransomware? ¿Cómo se podría detectar y mitigar un ataque de ransomware en una red empresarial?
 
 
-### Borrado con estilo.
-En las máquinas virtuales después de realizar el ejercicio y nunca vamos a volver a userlas, vamos a borrar el sistema con estilo.
-**Ojo**: Este paso es irreversible, así que asegúrate de que no necesitas nada de las máquinas virtuales antes de proceder. Además no lo hagas en tu máquina física, ya que esto borrará todo el sistema operativo y los datos almacenados en él. También no lo hagas en otra máquina que no sea tuya, ya que esto puede causar daños irreparables a la máquina y a los datos almacenados en ella.
 
-- En Windows
-```cmd
-del /f /s /q C:\*.*
-```
-- En Linux
-```bash
-sudo rm -rf /* --no-preserve-root
-```
+
 
 
 # Notas para entrega.
